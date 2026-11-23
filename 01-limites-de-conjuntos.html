@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KX76XF8R');</script>
+<!-- End Google Tag Manager -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Límites de conjuntos · Teoría de la medida · Teoría de la medida</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Teoría de la medida visual e interactiva: medir conjuntos, la integral de Lebesgue y los teoremas de convergencia, con laboratorios, ejemplos y ejercicios resueltos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KX76XF8R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="wrap" data-page="limites-de-conjuntos">
+<header class="topbar"><a class="brand" href="index.html">Teoría de la <b>medida</b></a><span class="eyebrow">Libro visual e interactivo · Maestría en Modelos Aleatorios</span></header>
+<div class="layout">
+<nav class="toc" id="toc" aria-label="Ruta de aprendizaje"></nav>
+<main>
+<header class="page-head"><span class="num">CAPÍTULO 01 DE 10</span><h1>Límites de sucesiones de conjuntos</h1><p class="lede">Antes de medir hay que saber qué significa que una sucesión de conjuntos se acerque a otro. La idea es sencilla: mirar cada punto y preguntar si entra y sale, o si se queda.</p></header>
+<section><h2>La idea: ¿por qué hace falta un límite de conjuntos?</h2><div class="prose"><p>Toda la teoría de la medida gira alrededor de una pregunta: si tengo conjuntos <span class="math">A_1, A_2, A_3, \dots</span> que se parecen cada vez más a un conjunto <span class="math">A</span>, ¿la medida de <span class="math">A_n</span> se parece cada vez más a la medida de <span class="math">A</span>? Por ejemplo, la probabilidad de «la moneda sale cara alguna vez en los primeros <span class="math">n</span> lanzamientos» crece con <span class="math">n</span>. ¿A qué se acerca? A la probabilidad de «sale cara alguna vez». Para hablar de eso necesitamos decir con precisión qué es <b>el límite de una sucesión de conjuntos</b>.</p><p>Con números sabemos qué hacer: <span class="math">x_n \to x</span> si <span class="math">x_n</span> termina tan cerca de <span class="math">x</span> como queramos. Con conjuntos no hay una «distancia» evidente, pero hay una idea más simple que funciona siempre: <b>mirar un punto a la vez</b>.</p></div><div class="analogia"><b>Imagínalo así</b><p>Piensa en cada conjunto <span class="math">A_n</span> como la lista de luces encendidas en la noche <span class="math">n</span> de una ciudad. Una casa puede quedar <b>encendida para siempre</b> a partir de cierta noche, <b>apagarse para siempre</b>, o <b>parpadear</b>: encenderse y apagarse sin fin. El límite inferior junta las casas que terminan encendidas para siempre. El límite superior junta las casas que se encienden infinitas noches, aunque también se apaguen infinitas veces.</p></div><div class="prose"><p>Esa es toda la idea del capítulo. El resto es escribirla con cuidado y aprender a calcularla.</p></div><div class="lab" id="01-lab-1"><div class="lab-title"><span class="tag">Laboratorio</span><h3>Entra y sale: los límites de una sucesión de conjuntos</h3></div><p class="hint">Cada fila es un conjunto <span class="math">A_n</span> de la recta, de <span class="math">n=1</span> (arriba) hacia abajo. Mueve el punto <span class="math">x</span> y mira su historia: un 1 cuando está en <span class="math">A_n</span> y un 0 cuando no. Abajo están el límite inferior y el superior de la sucesión completa.</p><style>
+[id="01-lab-1"] .m1-hist{font:600 .95rem var(--f-mono);letter-spacing:.06em;word-break:break-all}
+[id="01-lab-1"] .m1-hist i{font-style:normal;color:var(--muted)}
+[id="01-lab-1"] .m1-hist b{color:var(--accent)}
+</style>
+<div class="opciones">
+  <label>Sucesión
+    <select id="m1-ej">
+      <option value="crece">Crece: [−3+3/n, 3−3/n]</option>
+      <option value="decrece">Decrece: (−1, 1/n)</option>
+      <option value="alterna" selected>Se turnan: [0,2] y [1,3]</option>
+      <option value="borde">Borde que parpadea: [0, 1+(−1)ⁿ/n]</option>
+      <option value="escapa">Se escapa: [n/4, n/4+1]</option>
+      <option value="barrido">Barrido de [0,1]</option>
+    </select></label>
+</div>
+<div class="ctls">
+  <label class="ctl">Filas que se dibujan <output id="m1-n-o"></output>
+    <input id="m1-n" type="range" min="4" max="24" step="1" value="12"></label>
+  <label class="ctl">Punto x <output id="m1-x-o"></output>
+    <input id="m1-x" type="range" min="0" max="1000" step="1" value="560"></label>
+</div>
+<canvas id="m1-c" role="img" aria-label="Los conjuntos A_n como barras, uno por fila, y sus límites inferior y superior"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i><var>A<sub>n</sub></var></span><span><i style="background:var(--good)"></i>lím inf</span><span><i style="background:var(--warm)"></i>lím sup</span><span><i style="background:var(--ink)"></i>el punto <var>x</var></span></div>
+<div class="readout" id="m1-out" aria-live="polite"></div></div></section>
+<section><h2>Primero, los números: límite superior e inferior</h2><div class="prose"><p>Una sucesión de números puede no tener límite: <span class="math">(-1)^n</span> salta entre <span class="math">-1</span> y <span class="math">1</span> para siempre. Aun así, hay dos números que describen hacia dónde va «en el largo plazo»: el mayor y el menor de los valores a los que regresa una y otra vez.</p><p>Para encontrarlos, miramos <b>colas</b> de la sucesión: lo que queda después de borrar los primeros términos. Si borro los primeros <span class="math">n-1</span>, me queda la cola <span class="math">x_n, x_{n+1}, x_{n+2}, \dots</span> y puedo calcular su techo y su piso:</p><div class="math-display">a_n = \sup_{k\ge n} x_k \qquad\qquad b_n = \inf_{k\ge n} x_k</div><p>Al borrar más términos, el techo solo puede bajar y el piso solo puede subir: <span class="math">a_n</span> es decreciente y <span class="math">b_n</span> es creciente. Las sucesiones monótonas siempre tienen límite (quizás <span class="math">\pm\infty</span>), así que estos límites existen siempre.</p></div><div class="enunciado enunciado-definicion" id="def-limsup-num"><p class="enunciado-t"><b>Definición 1.1</b> <span class="nombre">(límite superior e inferior de números)</span></p><p>Sea <span class="math">(x_n)_{n\ge1}</span> una sucesión de números reales. Su <b>límite superior</b> (<i>limit superior</i>, <span class="math">\limsup</span>) y su <b>límite inferior</b> (<i>limit inferior</i>, <span class="math">\liminf</span>) son</p><div class="math-display">\limsup_{n\to\infty} x_n = \inf_{n\ge1}\ \sup_{k\ge n} x_k, \qquad
+\liminf_{n\to\infty} x_n = \sup_{n\ge1}\ \inf_{k\ge n} x_k .</div><p>Pueden valer <span class="math">+\infty</span> o <span class="math">-\infty</span>. Se usan también las notaciones <span class="math">\overline{\lim}\,x_n</span> y <span class="math">\underline{\lim}\,x_n</span>.</p></div><div class="enunciado enunciado-ejemplo" id="ej-alterna"><p class="enunciado-t"><b>Ejemplo 1.2</b></p><p>Para <span class="math">x_n=(-1)^n\left(1+\tfrac1n\right)</span> los términos son <span class="math">-2,\ 1.5,\ -1.33,\ 1.25,\ -1.2,\dots</span> Cada cola contiene términos positivos que se acercan a <span class="math">1</span> desde arriba, así que <span class="math">a_n = \sup_{k\ge n}x_k</span> es el primer término positivo de la cola: <span class="math">a_n \downarrow 1</span>. Del mismo modo <span class="math">b_n\uparrow -1</span>. Entonces <span class="math">\limsup x_n = 1</span> y <span class="math">\liminf x_n=-1</span>: la sucesión regresa una y otra vez cerca de <span class="math">1</span> y cerca de <span class="math">-1</span>, y a ningún otro lugar.</p></div><div class="lab" id="01-lab-2"><div class="lab-title"><span class="tag">Laboratorio</span><h3>Las envolventes de una sucesión</h3></div><p class="hint">Elige una sucesión y mueve «desde <span class="math">n</span>». La franja sombreada es la cola que queda; las líneas son su techo <span class="math">a_n=\sup_{k\ge n}x_k</span> y su piso <span class="math">b_n=\inf_{k\ge n}x_k</span>. Al correr la cola, el techo baja y el piso sube hasta el límite superior y el inferior.</p><div class="opciones">
+  <label>Sucesión
+    <select id="m2-ej">
+      <option value="alt" selected>(−1)ⁿ(1 + 1/n)</option>
+      <option value="sin">sen(n)</option>
+      <option value="mod">n mod 3 (0, 1, 2, 0, …)</option>
+      <option value="conv">2 + (−1)ⁿ/n (converge)</option>
+      <option value="sube">(−1)ⁿ·n/4 (no acotada)</option>
+    </select></label>
+</div>
+<div class="ctls">
+  <label class="ctl">Cola desde n = <output id="m2-m-o"></output>
+    <input id="m2-m" type="range" min="1" max="50" step="1" value="1"></label>
+</div>
+<canvas id="m2-c" role="img" aria-label="Términos de la sucesión con el techo y el piso de la cola"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>términos x<sub>k</sub></span><span><i style="background:var(--warm)"></i>techo a<sub>n</sub> = sup de la cola</span><span><i style="background:var(--good)"></i>piso b<sub>n</sub> = inf de la cola</span></div>
+<div class="readout" id="m2-out" aria-live="polite"></div></div><div class="enunciado enunciado-proposicion" id="prop-limsup-converge"><p class="enunciado-t"><b>Proposición 1.3</b></p><p>Sea <span class="math">(x_n)</span> una sucesión real. Entonces <span class="math">\liminf x_n \le \limsup x_n</span>, y <span class="math">(x_n)</span> tiene límite <span class="math">L</span> (finito o infinito) si y solo si <span class="math">\liminf x_n=\limsup x_n=L</span>.</p></div><details class="demostracion"><summary>Demostración · <a class="ref" href="#prop-limsup-converge">Proposición 1.3</a></summary><p><b>Idea:</b> el piso de una cola nunca supera su techo, y una sucesión converge justo cuando el piso y el techo se juntan.</p><p>Para cada <span class="math">n</span>, <span class="math">b_n=\inf_{k\ge n}x_k\le x_n\le \sup_{k\ge n}x_k=a_n</span>. Si <span class="math">m\le n</span>, entonces <span class="math">b_m\le b_n\le a_n</span>, y si <span class="math">m\ge n</span>, <span class="math">b_m\le a_m\le a_n</span>. Así, todo <span class="math">b_m</span> es menor o igual que todo <span class="math">a_n</span>, y tomando supremo en <span class="math">m</span> e ínfimo en <span class="math">n</span> queda <span class="math">\liminf x_n\le\limsup x_n</span>.</p><p>Si los dos valen <span class="math">L</span> finito, como <span class="math">b_n\le x_n\le a_n</span> y <span class="math">a_n\to L</span>, <span class="math">b_n\to L</span>, el teorema del sándwich da <span class="math">x_n\to L</span>. Recíprocamente, si <span class="math">x_n\to L</span>, dado <span class="math">\varepsilon&gt;0</span> hay un <span class="math">N</span> con <span class="math">L-\varepsilon&lt;x_k&lt;L+\varepsilon</span> para todo <span class="math">k\ge N</span>; entonces <span class="math">L-\varepsilon\le b_N\le a_N\le L+\varepsilon</span>, y como <span class="math">\varepsilon</span> es arbitrario, <span class="math">\liminf x_n=\limsup x_n=L</span>. Los casos <span class="math">L=\pm\infty</span> se prueban igual, cambiando el intervalo por una semirrecta.</p><p class="qed" aria-hidden="true">∎</p></details><div class="enunciado enunciado-observacion"><p class="enunciado-t"><b>Observación 1.4</b></p><p>Una manera práctica de leer el límite superior: <span class="math">L=\limsup x_n</span> (finito) si y solo si para todo <span class="math">\varepsilon&gt;0</span></p><ul><li>a partir de cierto <span class="math">n</span>, todos los términos cumplen <span class="math">x_n&lt;L+\varepsilon</span> (el techo termina por debajo de <span class="math">L+\varepsilon</span>), y</li><li>hay infinitos términos con <span class="math">x_n&gt;L-\varepsilon</span> (la sucesión regresa una y otra vez cerca de <span class="math">L</span>).</li></ul></div></section>
+<section><h2>Sucesiones de conjuntos</h2><div class="prose"><p>Ahora los términos son conjuntos <span class="math">A_1,A_2,\dots</span>, todos dentro de un conjunto grande <span class="math">\Omega</span> (el «universo»: la recta, el plano o el conjunto de resultados de un experimento). El caso más fácil es cuando los conjuntos solo crecen o solo decrecen.</p></div><div class="enunciado enunciado-definicion" id="def-monotona"><p class="enunciado-t"><b>Definición 1.5</b> <span class="nombre">(sucesión monótona)</span></p><p>Una sucesión de conjuntos <span class="math">(A_n)</span> es <b>creciente</b> si <span class="math">A_n\subseteq A_{n+1}</span> para todo <span class="math">n</span>, y <b>decreciente</b> si <span class="math">A_n\supseteq A_{n+1}</span> para todo <span class="math">n</span>. Su límite es</p><div class="math-display">\lim_{n} A_n=\bigcup_{n\ge1}A_n \ \text{ si crece} \qquad\qquad \lim_n A_n=\bigcap_{n\ge1}A_n \ \text{ si decrece},</div><p>y se escribe <span class="math">A_n\uparrow A</span> o <span class="math">A_n\downarrow A</span>.</p></div><div class="enunciado enunciado-ejemplo" id="ej-crece-abierto"><p class="enunciado-t"><b>Ejemplo 1.6</b></p><p><span class="math">A_n=\left[-3+\tfrac3n,\ 3-\tfrac3n\right]</span> crece: <span class="math">A_1=\{0\}</span>, <span class="math">A_2=[-1.5,1.5]</span>, <span class="math">A_3=[-2,2]</span>… Su límite es la unión, <span class="math">(-3,3)</span>. Todos los <span class="math">A_n</span> son cerrados, pero el límite es abierto: los extremos <span class="math">\pm3</span> nunca entran.</p></div><div class="enunciado enunciado-ejemplo" id="ej-decrece"><p class="enunciado-t"><b>Ejemplo 1.7</b></p><p><span class="math">A_n=\left(-1,\ \tfrac1n\right)</span> decrece y su límite es <span class="math">\bigcap_n(-1,1/n)=(-1,0]</span>. El <span class="math">0</span> está en todos los <span class="math">A_n</span> porque <span class="math">0&lt;1/n</span>; un <span class="math">x&gt;0</span> queda fuera en cuanto <span class="math">1/n\le x</span>.</p></div><div class="prose"><p>Cuando la sucesión no es monótona, la fabricamos monótona, igual que con los números: la intersección de una cola es el «piso» y la unión de una cola es el «techo».</p><div class="math-display">B_n=\bigcap_{k\ge n}A_k \ \ (\text{crece}) \qquad\qquad C_n=\bigcup_{k\ge n}A_k \ \ (\text{decrece})</div></div><div class="enunciado enunciado-definicion" id="def-limsup-conj"><p class="enunciado-t"><b>Definición 1.8</b> <span class="nombre">(límite superior e inferior de conjuntos)</span></p><p>Para una sucesión de conjuntos <span class="math">(A_n)</span>,</p><div class="math-display">\liminf_{n\to\infty} A_n=\bigcup_{n\ge1}\ \bigcap_{k\ge n}A_k, \qquad
+\limsup_{n\to\infty} A_n=\bigcap_{n\ge1}\ \bigcup_{k\ge n}A_k .</div><p>Si los dos coinciden, la sucesión <b>tiene límite</b> y <span class="math">\lim A_n</span> es ese conjunto común.</p></div><div class="prose"><p>La fórmula se lee mejor punto a punto, que es lo que hace el primer laboratorio.</p></div><div class="enunciado enunciado-teorema" id="teo-puntos"><p class="enunciado-t"><b>Teorema 1.9</b> <span class="nombre">(lectura punto a punto)</span></p><p>Sea <span class="math">(A_n)</span> una sucesión de subconjuntos de <span class="math">\Omega</span> y <span class="math">x\in\Omega</span>.</p><ol class="steps"><li><span><span class="math">x\in\limsup A_n</span> si y solo si <span class="math">x</span> pertenece a <b>infinitos</b> <span class="math">A_n</span>.</span></li><li><span><span class="math">x\in\liminf A_n</span> si y solo si <span class="math">x</span> pertenece a <b>todos los <span class="math">A_n</span> a partir de cierto <span class="math">n</span></b>.</span></li></ol><p>En particular <span class="math">\liminf A_n\subseteq\limsup A_n</span>.</p></div><details class="demostracion"><summary>Demostración · <a class="ref" href="#teo-puntos">Teorema 1.9</a></summary><p><b>Idea:</b> traducir cada símbolo. Una intersección <span class="math">\bigcap_n</span> es «para todo <span class="math">n</span>» y una unión <span class="math">\bigcup_k</span> es «existe <span class="math">k</span>».</p><ol class="steps"><li><span><span class="math">x\in\bigcap_{n}\bigcup_{k\ge n}A_k</span> dice: para todo <span class="math">n</span> existe <span class="math">k\ge n</span> con <span class="math">x\in A_k</span>. Es decir, por lejos que miremos siempre hay otro <span class="math">A_k</span> que contiene a <span class="math">x</span>: <span class="math">x</span> está en infinitos <span class="math">A_k</span>. Y si <span class="math">x</span> está en infinitos, para cualquier <span class="math">n</span> alguno de ellos tiene índice <span class="math">k\ge n</span>.</span></li><li><span><span class="math">x\in\bigcup_n\bigcap_{k\ge n}A_k</span> dice: existe <span class="math">n</span> tal que para todo <span class="math">k\ge n</span>, <span class="math">x\in A_k</span>. Eso es exactamente «está en todos a partir de <span class="math">n</span>».</span></li></ol><p>Si <span class="math">x</span> está en todos los <span class="math">A_k</span> a partir de <span class="math">n</span>, está en infinitos, así que <span class="math">\liminf A_n\subseteq\limsup A_n</span>.</p><p class="qed" aria-hidden="true">∎</p></details><div class="enunciado enunciado-observacion"><p class="enunciado-t"><b>Observación 1.10</b></p><p>En probabilidad, <span class="math">\limsup A_n</span> se lee «ocurre <span class="math">A_n</span> infinitas veces» (en inglés <i>infinitely often</i>, abreviado i.o.) y <span class="math">\liminf A_n</span> se lee «a partir de cierto momento, ocurre siempre». Los dos eventos aparecen en el lema de Borel–Cantelli del capítulo 3.</p></div></section>
+<section><h2>La función indicadora: conjuntos que se vuelven números</h2><div class="prose"><p>Hay una manera de convertir cualquier pregunta sobre conjuntos en una pregunta sobre números: escribir un 1 donde el punto está y un 0 donde no está. Es la historia de 1 y 0 que muestra el primer laboratorio.</p></div><div class="enunciado enunciado-definicion" id="def-indicadora"><p class="enunciado-t"><b>Definición 1.11</b> <span class="nombre">(función indicadora)</span></p><p>La <b>función indicadora</b> (<i>indicator function</i>, también llamada función característica) de <span class="math">A\subseteq\Omega</span> es</p><div class="math-display">\mathbf 1_A(x)=\begin{cases}1 &amp; \text{si } x\in A\\ 0 &amp; \text{si } x\notin A.\end{cases}</div><p>También se escribe <span class="math">\chi_A</span> o <span class="math">\mathbb I_A</span>.</p></div><div class="prose"><p>Las operaciones con conjuntos se vuelven cuentas. Compruébalo en el laboratorio antes de leer las fórmulas:</p></div><div class="lab" id="01-lab-3"><div class="lab-title"><span class="tag">Laboratorio</span><h3>Conjuntos que se vuelven números</h3></div><p class="hint">Mueve los extremos de <span class="math">A</span> y de <span class="math">B</span> dentro de <span class="math">\Omega=[0,10]</span> y elige una operación. Las tres gráficas son las indicadoras de <span class="math">A</span>, de <span class="math">B</span> y del resultado; abajo está la cuenta que da la indicadora del resultado a partir de las otras dos.</p><div class="ctls">
+  <label class="ctl">A empieza en <output id="m3-a1-o"></output><input id="m3-a1" type="range" min="0" max="100" value="10"></label>
+  <label class="ctl">A termina en <output id="m3-a2-o"></output><input id="m3-a2" type="range" min="0" max="100" value="55"></label>
+  <label class="ctl">B empieza en <output id="m3-b1-o"></output><input id="m3-b1" type="range" min="0" max="100" value="35"></label>
+  <label class="ctl">B termina en <output id="m3-b2-o"></output><input id="m3-b2" type="range" min="0" max="100" value="85"></label>
+</div>
+<div class="opciones">
+  <label>Operación
+    <select id="m3-op">
+      <option value="and" selected>A ∩ B (intersección)</option>
+      <option value="or">A ∪ B (unión)</option>
+      <option value="not">Aᶜ (complemento de A)</option>
+      <option value="minus">A ∖ B (diferencia)</option>
+      <option value="xor">A △ B (diferencia simétrica)</option>
+    </select></label>
+</div>
+<canvas id="m3-c" role="img" aria-label="Los conjuntos A y B como barras y sus funciones indicadoras"></canvas>
+<div class="legend"><span><i style="background:var(--accent)"></i>A y 𝟏<sub>A</sub></span><span><i style="background:var(--c-tra)"></i>B y 𝟏<sub>B</sub></span><span><i style="background:var(--warm)"></i>resultado y su indicadora</span></div>
+<div class="readout" id="m3-out" aria-live="polite"></div></div><div class="prose"><div class="math-display">\mathbf 1_{A\cap B}=\mathbf 1_A\,\mathbf 1_B=\min(\mathbf 1_A,\mathbf 1_B),\qquad
+\mathbf 1_{A\cup B}=\max(\mathbf 1_A,\mathbf 1_B)=\mathbf 1_A+\mathbf 1_B-\mathbf 1_A\mathbf 1_B,\qquad
+\mathbf 1_{A^c}=1-\mathbf 1_A .</div></div><div class="enunciado enunciado-proposicion" id="prop-indicadora-lim"><p class="enunciado-t"><b>Proposición 1.12</b></p><p>Para toda sucesión de conjuntos <span class="math">(A_n)</span> y todo <span class="math">x\in\Omega</span>,</p><div class="math-display">\mathbf 1_{\limsup A_n}(x)=\limsup_{n\to\infty}\mathbf 1_{A_n}(x), \qquad \mathbf 1_{\liminf A_n}(x)=\liminf_{n\to\infty}\mathbf 1_{A_n}(x).</div><p>En consecuencia, <span class="math">A_n\to A</span> si y solo si <span class="math">\mathbf 1_{A_n}(x)\to\mathbf 1_A(x)</span> para cada <span class="math">x</span>.</p></div><details class="demostracion"><summary>Demostración · <a class="ref" href="#prop-indicadora-lim">Proposición 1.12</a></summary><p><b>Idea:</b> una sucesión de ceros y unos tiene límite superior 1 exactamente cuando tiene infinitos unos.</p><p>La sucesión <span class="math">\mathbf 1_{A_n}(x)</span> solo toma los valores 0 y 1. Su límite superior es 1 si hay infinitos unos y 0 si no; por el <a class="ref" href="#teo-puntos">Teorema 1.9</a>, hay infinitos unos si y solo si <span class="math">x\in\limsup A_n</span>. Su límite inferior es 1 si a partir de cierto <span class="math">n</span> todos son unos, y 0 si hay infinitos ceros; de nuevo por el <a class="ref" href="#teo-puntos">Teorema 1.9</a>, eso es <span class="math">x\in\liminf A_n</span>. La última afirmación sale de la <a class="ref" href="#prop-limsup-converge">Proposición 1.3</a>: <span class="math">\mathbf 1_{A_n}(x)</span> converge si y solo si su límite inferior y superior coinciden.</p><p class="qed" aria-hidden="true">∎</p></details></section>
+<section><h2>Ejemplos resueltos</h2><div class="enunciado enunciado-ejemplo" id="ej-alternan"><p class="enunciado-t"><b>Ejemplo 1.13</b></p><p><b>Dos conjuntos que se turnan.</b> Sea <span class="math">A_n=[0,2]</span> si <span class="math">n</span> es impar y <span class="math">A_n=[1,3]</span> si <span class="math">n</span> es par.</p><ul><li>Un <span class="math">x\in[1,2]</span> está en todos los <span class="math">A_n</span>: está en el límite inferior.</li><li>Un <span class="math">x\in[0,1)</span> está en los impares y no en los pares: aparece infinitas veces, pero también falta infinitas veces. Lo mismo para <span class="math">x\in(2,3]</span>.</li><li>Un <span class="math">x</span> fuera de <span class="math">[0,3]</span> no está en ninguno.</li></ul><p>Por el <a class="ref" href="#teo-puntos">Teorema 1.9</a>, <span class="math">\liminf A_n=[1,2]</span> y <span class="math">\limsup A_n=[0,3]</span>. La sucesión no tiene límite.</p></div><div class="enunciado enunciado-ejemplo" id="ej-multiplos"><p class="enunciado-t"><b>Ejemplo 1.14</b></p><p><b>Múltiplos.</b> Sea <span class="math">A_n=\{\dots,-2n,-n,0,n,2n,\dots\}</span>, los enteros múltiplos de <span class="math">n</span>. El <span class="math">0</span> está en todos. Un entero <span class="math">m\neq0</span> es múltiplo de <span class="math">n</span> solo si <span class="math">n\le|m|</span>, así que está en finitos <span class="math">A_n</span>. Por lo tanto <span class="math">\liminf A_n=\limsup A_n=\{0\}</span>: la sucesión tiene límite, <span class="math">\{0\}</span>, aunque no es monótona.</p></div><div class="enunciado enunciado-ejemplo" id="ej-borde"><p class="enunciado-t"><b>Ejemplo 1.15</b></p><p><b>Un borde que parpadea.</b> Sea <span class="math">A_n=\left[0,\ 1+\tfrac{(-1)^n}{n}\right]</span>: los pares van un poco más allá de 1 y los impares se quedan un poco antes.</p><ul><li>Si <span class="math">0\le x&lt;1</span>, a partir de cierto <span class="math">n</span> se cumple <span class="math">1-\frac1n&gt; x</span>, y entonces <span class="math">x</span> está en todos los <span class="math">A_n</span>.</li><li>El punto <span class="math">x=1</span> está en los pares y falta en los impares.</li><li>Si <span class="math">x&gt;1</span>, está solo en los pares con <span class="math">\frac1n\ge x-1</span>, que son finitos.</li></ul><p>Así <span class="math">\liminf A_n=[0,1)</span> y <span class="math">\limsup A_n=[0,1]</span>. Todo se decide en un único punto, el <span class="math">1</span>.</p></div><div class="enunciado enunciado-ejemplo" id="ej-barrido"><p class="enunciado-t"><b>Ejemplo 1.16</b></p><p><b>El barrido.</b> Parte <span class="math">[0,1]</span> en mitades, después en cuartos, después en octavos, y recorre los pedazos de izquierda a derecha: <span class="math">A_1=[0,1]</span>, <span class="math">A_2=[0,\tfrac12]</span>, <span class="math">A_3=[\tfrac12,1]</span>, <span class="math">A_4=[0,\tfrac14]</span>, … Cada pedazo es más chico que el anterior, pero cada <span class="math">x\in[0,1]</span> cae en un pedazo de cada pasada, y cae fuera de los demás. Por lo tanto <span class="math">\limsup A_n=[0,1]</span> y <span class="math">\liminf A_n=\varnothing</span>. Volveremos a este ejemplo en el capítulo 8: es la sucesión que converge «en medida» pero no en ningún punto.</p></div><div class="practica"><div class="practica-title"><span class="tag">En el navegador</span><h3>Envolventes en Desmos</h3></div><p>Abre la calculadora gráfica gratuita de Desmos (https://www.desmos.com/calculator), que no pide registro, y escribe estas líneas, una por renglón:</p><div class="cmds"><div class="cmd-panel" data-so="win mac linux"><div class="cmd-l"><code>n=[1...60]</code><button type="button" class="copiar">Copiar</button></div><div class="cmd-l"><code>x(k)=(-1)^k(1+1/k)</code><button type="button" class="copiar">Copiar</button></div><div class="cmd-l"><code>(n,x(n))</code><button type="button" class="copiar">Copiar</button></div></div></div><p>Agrega después la cola desde un <span class="math">m</span> que puedas mover con un deslizador:</p><div class="cmds"><div class="cmd-panel" data-so="win mac linux"><div class="cmd-l"><code>m=1</code><button type="button" class="copiar">Copiar</button></div><div class="cmd-l"><code>(n,max(x([m...80]))){n&gt;=m}</code><button type="button" class="copiar">Copiar</button></div><div class="cmd-l"><code>(n,min(x([m...80]))){n&gt;=m}</code><button type="button" class="copiar">Copiar</button></div></div></div><p>Mueve el deslizador de <span class="math">m</span> de 1 a 50 y cambia la definición de <code>x(k)</code> por <code>sin(k)</code> o por <code>mod(k,3)</code>.</p><p><b>Qué observar:</b> al aumentar <span class="math">m</span>, el máximo de la cola nunca sube y el mínimo nunca baja. Con <span class="math">(-1)^k(1+1/k)</span> se acercan a <span class="math">1</span> y a <span class="math">-1</span>. Con <span class="math">\sin(k)</span> se quedan cerca de <span class="math">1</span> y de <span class="math">-1</span> aunque la sucesión no se repite nunca.</p></div></section>
+<section><h2>En la práctica</h2><div class="ml"><b>En la práctica</b><p><b>Eventos que se repiten.</b> Si <span class="math">A_n</span> es «el precio de una acción cierra por encima de 100 el día <span class="math">n</span>», entonces <span class="math">\limsup A_n</span> es «cierra por encima de 100 infinitos días» y <span class="math">\liminf A_n</span> es «a partir de algún día, cierra siempre por encima de 100». Los modelos de riesgo preguntan justo eso: si una pérdida grande ocurrirá una y otra vez o terminará por desaparecer. En aprendizaje automático, la convergencia de un algoritmo estocástico se suele demostrar probando que el evento «el error supera <span class="math">\varepsilon</span>» ocurre solo finitas veces, es decir, que tiene probabilidad cero el <span class="math">\limsup</span> de esos eventos.</p></div></section>
+<section><h2>Ejercicios</h2><div class="ejercicio" id="ejr-1-1"><p class="enunciado-t"><b>Ejercicio 1.1</b> <span class="nivel" aria-label="Dificultad 1 de 3">★☆☆</span></p><p>Calcula <span class="math">\limsup</span> y <span class="math">\liminf</span> de <span class="math">x_n=\dfrac{(-1)^n n}{n+1}</span>.</p></div><details class="pista"><summary>Pista</summary><p>Separa los términos pares de los impares y calcula el límite de cada grupo.</p></details><details class="solucion"><summary>Solución</summary><p>Los pares son <span class="math">\frac{n}{n+1}\to1</span> y los impares <span class="math">-\frac{n}{n+1}\to-1</span>. Toda cola contiene términos de los dos grupos, así que <span class="math">\limsup x_n=1</span> y <span class="math">\liminf x_n=-1</span>.</p></details><div class="ejercicio" id="ejr-1-2"><p class="enunciado-t"><b>Ejercicio 1.2</b> <span class="nivel" aria-label="Dificultad 1 de 3">★☆☆</span></p><p>Sea <span class="math">A_n=\left[\tfrac1n,\ 2+\tfrac1n\right]</span>. ¿Es monótona? Calcula <span class="math">\liminf A_n</span> y <span class="math">\limsup A_n</span>.</p></div><details class="pista"><summary>Pista</summary><p>No es creciente ni decreciente. Usa la lectura punto a punto: ¿qué pasa con <span class="math">x=0</span>, con <span class="math">x=2</span> y con <span class="math">x=1</span>?</p></details><details class="solucion"><summary>Solución</summary><p>No es monótona: el extremo izquierdo baja (crece el conjunto por la izquierda) y el derecho también baja (decrece por la derecha). Un <span class="math">x\in(0,2]</span> cumple <span class="math">\frac1n\le x\le 2+\frac1n</span> a partir de cierto <span class="math">n</span>, así que está en todos desde ahí. El <span class="math">0</span> no está en ninguno. Un <span class="math">x\in(2,3]</span> está solo mientras <span class="math">\frac1n\ge x-2</span>, finitas veces. Resultado: <span class="math">\liminf A_n=\limsup A_n=(0,2]</span>, y la sucesión tiene límite.</p></details><div class="ejercicio" id="ejr-1-3"><p class="enunciado-t"><b>Ejercicio 1.3</b> <span class="nivel" aria-label="Dificultad 2 de 3">★★☆</span></p><p>Demuestra las leyes de De Morgan para límites: <span class="math">\left(\limsup A_n\right)^c=\liminf A_n^c</span> y <span class="math">\left(\liminf A_n\right)^c=\limsup A_n^c</span>.</p></div><details class="pista"><summary>Pista</summary><p>Usa la lectura punto a punto: «no estar en infinitos <span class="math">A_n</span>» es lo mismo que «estar en <span class="math">A_n^c</span> a partir de cierto <span class="math">n</span>».</p></details><details class="solucion"><summary>Solución</summary><p><span class="math">x\notin\limsup A_n</span> si y solo si <span class="math">x</span> está solo en finitos <span class="math">A_n</span>, si y solo si existe <span class="math">N</span> con <span class="math">x\notin A_n</span> para todo <span class="math">n\ge N</span>, si y solo si <span class="math">x\in A_n^c</span> para todo <span class="math">n\ge N</span>, que es <span class="math">x\in\liminf A_n^c</span>. La segunda igualdad sale de aplicar la primera a la sucesión <span class="math">A_n^c</span> y tomar complementos.</p></details><div class="ejercicio" id="ejr-1-4"><p class="enunciado-t"><b>Ejercicio 1.4</b> <span class="nivel" aria-label="Dificultad 2 de 3">★★☆</span></p><p>Sean <span class="math">A</span> y <span class="math">B</span> dos conjuntos y <span class="math">A_n=A</span> si <span class="math">n</span> es par, <span class="math">A_n=B</span> si <span class="math">n</span> es impar. Calcula <span class="math">\liminf A_n</span> y <span class="math">\limsup A_n</span> en términos de <span class="math">A</span> y <span class="math">B</span>. ¿Cuándo tiene límite la sucesión?</p></div><details class="pista"><summary>Pista</summary><p>Un punto está en todos a partir de cierto <span class="math">n</span> solo si está en los dos conjuntos.</p></details><details class="solucion"><summary>Solución</summary><p><span class="math">\liminf A_n=A\cap B</span> y <span class="math">\limsup A_n=A\cup B</span>. La sucesión tiene límite si y solo si <span class="math">A\cap B=A\cup B</span>, es decir, si <span class="math">A=B</span>. El <a class="ref" href="#ej-alternan">Ejemplo 1.13</a> es el caso <span class="math">A=[1,3]</span>, <span class="math">B=[0,2]</span>.</p></details><div class="ejercicio" id="ejr-1-5"><p class="enunciado-t"><b>Ejercicio 1.5</b> <span class="nivel" aria-label="Dificultad 2 de 3">★★☆</span></p><p>Demuestra que <span class="math">\limsup(A_n\cup B_n)=\limsup A_n\cup\limsup B_n</span>. ¿Vale lo mismo con <span class="math">\liminf</span>? Da una prueba o un contraejemplo.</p></div><details class="pista"><summary>Pista</summary><p>Para la unión: si un punto está en infinitos <span class="math">A_n\cup B_n</span>, ¿puede estar solo en finitos <span class="math">A_n</span> y en finitos <span class="math">B_n</span>? Para el contraejemplo con <span class="math">\liminf</span>, prueba con conjuntos que se turnan.</p></details><details class="solucion"><summary>Solución</summary><p>Si <span class="math">x</span> está en infinitos <span class="math">A_n\cup B_n</span>, cada uno de esos índices pone a <span class="math">x</span> en <span class="math">A_n</span> o en <span class="math">B_n</span>, así que uno de los dos grupos de índices es infinito: <span class="math">x\in\limsup A_n\cup\limsup B_n</span>. La otra inclusión es inmediata. Con <span class="math">\liminf</span> solo vale <span class="math">\liminf A_n\cup\liminf B_n\subseteq\liminf(A_n\cup B_n)</span>: si <span class="math">A_n=[0,1]</span> en los pares y <span class="math">\varnothing</span> en los impares, y <span class="math">B_n</span> al revés, entonces <span class="math">A_n\cup B_n=[0,1]</span> siempre, pero <span class="math">\liminf A_n=\liminf B_n=\varnothing</span>.</p></details><div class="ejercicio" id="ejr-1-6"><p class="enunciado-t"><b>Ejercicio 1.6</b> <span class="nivel" aria-label="Dificultad 3 de 3">★★★</span></p><p>Sea <span class="math">(x_n)</span> una sucesión real y <span class="math">A_n=(-\infty,x_n]</span>. Demuestra que <span class="math">(-\infty,\liminf x_n)\subseteq\liminf A_n\subseteq(-\infty,\liminf x_n]</span> y encuentra un ejemplo donde la primera inclusión es estricta y otro donde la segunda es estricta.</p></div><details class="pista"><summary>Pista</summary><p><span class="math">t\in A_n</span> si y solo si <span class="math">t\le x_n</span>. Usa la definición de <span class="math">\liminf x_n</span> como supremo de los pisos de las colas.</p></details><details class="solucion"><summary>Solución</summary><p>Llama <span class="math">L=\liminf x_n</span>. Si <span class="math">t&lt;L</span>, como <span class="math">b_n=\inf_{k\ge n}x_k\uparrow L</span>, existe <span class="math">n</span> con <span class="math">b_n&gt;t</span>, y entonces <span class="math">t&lt;x_k</span> para todo <span class="math">k\ge n</span>: <span class="math">t\in\liminf A_n</span>. Si <span class="math">t\in\liminf A_n</span>, existe <span class="math">n</span> con <span class="math">t\le x_k</span> para todo <span class="math">k\ge n</span>, así que <span class="math">t\le b_n\le L</span>. Con <span class="math">x_n=1/n</span>, <span class="math">L=0</span> y <span class="math">0\le x_n</span> siempre, así que <span class="math">0\in\liminf A_n</span>: la primera inclusión es estricta. Con <span class="math">x_n=-1/n</span>, <span class="math">L=0</span> pero <span class="math">0&gt;x_n</span> para todo <span class="math">n</span>, así que <span class="math">0\notin\liminf A_n</span>: la segunda es estricta.</p></details></section>
+<section><h2>Con la IA</h2><div class="prompt"><div class="prompt-title"><span class="tag">Prompt para la IA</span><h3>Otro ejemplo, paso a paso</h3></div><div class="code-copia"><pre><code>Dame una sucesión de subconjuntos de la recta real que no sea monótona y cuyo límite superior e inferior sean distintos. Antes de darme la respuesta, pídeme que yo calcule los dos límites usando la lectura punto a punto (un punto está en el límite superior si pertenece a infinitos conjuntos, y en el inferior si pertenece a todos a partir de cierto índice). Después corrige mi respuesta.</code></pre><button type="button" class="copiar copiar-todo">Copiar</button></div></div><div class="prompt"><div class="prompt-title"><span class="tag">Prompt para la IA</span><h3>Revisa mi demostración</h3></div><div class="code-copia"><pre><code>Voy a escribir una demostración de que el complemento del límite superior de una sucesión de conjuntos es el límite inferior de los complementos. Revísala línea por línea: señala cualquier paso que no esté justificado, pero no me des la demostración completa hasta que yo lo pida.</code></pre><button type="button" class="copiar copiar-todo">Copiar</button></div></div></section>
+<section><h2>Para investigar</h2><div class="investiga"><h3>Para investigar</h3><p class="hint">Estas preguntas no se responden en el capítulo: búscalas por tu cuenta.</p><ol><li>¿Qué problema quería resolver Henri Lebesgue en su tesis de 1902 y por qué la integral de Riemann no le alcanzaba?<small>Pista: busca «Intégrale, longueur, aire».</small></li><li>¿Qué es la recta real extendida <span class="math">\overline{\mathbb R}=[-\infty,+\infty]</span> y qué operaciones con <span class="math">\infty</span> están permitidas en teoría de la medida?<small>Pista: fíjate en <span class="math">0\cdot\infty</span>.</small></li><li>¿Qué son los límites de Kuratowski de una sucesión de conjuntos en un espacio métrico y en qué se diferencian de los de este capítulo?</li><li>¿Qué significa que un conjunto sea numerable y por qué el conjunto de los números racionales lo es?</li></ol></div></section>
+<section><h2>Pruébate</h2><div class="quiz"><h3>Pruébate</h3><details><summary>Si <span class="math">x_n\to 5</span>, ¿cuánto valen <span class="math">\limsup x_n</span> y <span class="math">\liminf x_n</span>?</summary><p>Los dos valen 5: una sucesión converge justo cuando su límite superior e inferior coinciden.</p></details><details><summary>¿Puede ser <span class="math">\limsup A_n=\varnothing</span> si todos los <span class="math">A_n</span> son no vacíos?</summary><p>Sí. Con <span class="math">A_n=[n,n+1]</span> cada punto está en a lo sumo dos conjuntos, así que ninguno está en infinitos.</p></details><details><summary>Para una sucesión creciente, ¿qué relación hay entre <span class="math">\liminf A_n</span>, <span class="math">\limsup A_n</span> y <span class="math">\bigcup A_n</span>?</summary><p>Son iguales: un punto que entra en algún <span class="math">A_n</span> ya no sale.</p></details><details><summary>¿Qué valores puede tomar <span class="math">\limsup_n \mathbf 1_{A_n}(x)</span>?</summary><p>Solo 0 o 1, según <span class="math">x</span> esté en finitos o en infinitos <span class="math">A_n</span>.</p></details><details><summary>En el barrido de <span class="math">[0,1]</span>, ¿por qué el límite inferior es vacío?</summary><p>Porque en cada pasada el pedazo que contiene a <span class="math">x</span> es uno solo, y los demás pedazos de esa pasada no lo contienen: <span class="math">x</span> falta infinitas veces.</p></details></div></section>
+<label class="got"><input type="checkbox" id="got"> Lo tengo claro</label>
+<nav class="pager" id="pager" aria-label="Capítulo anterior y siguiente"></nav>
+</main>
+</div>
+<footer><span>Libro abierto de la Maestría en Modelos Aleatorios, reescrito a partir del material de Synergy Vision.</span><span>Sitio publicado: <a href="https://github.com/aaramirez/medida" target="_blank" rel="noopener">github.com/aaramirez/medida</a></span></footer>
+</div>
+<script src="assets/lab.js"></script>
+<script>
+(function(){
+  const {$,tok,canvasWidget,short}=window.Lab;
+  // Intervalo: [a,b,abiertoIzq,abiertoDer]
+  const barrido=n=>{let k=0;while((1<<(k+1))<=n)k++;const j=n-(1<<k),L=1/(1<<k);return [[j*L,(j+1)*L,false,false]];};
+  const EJ={
+    crece:{x0:-4,x1:4,sets:n=>[[-3+3/n,3-3/n,false,false]],inf:[[-3,3,true,true]],sup:[[-3,3,true,true]],
+      ver:x=>Math.abs(x)<3?'inf':'fuera',nota:'Todos los A_n son cerrados, pero el límite (−3, 3) es abierto.'},
+    decrece:{x0:-2,x1:2,sets:n=>[[-1,1/n,true,true]],inf:[[-1,0,true,false]],sup:[[-1,0,true,false]],
+      ver:x=>(x>-1&&x<=0)?'inf':'fuera',nota:'El 0 está en todos porque 0 < 1/n; cualquier x > 0 queda fuera tarde o temprano.'},
+    alterna:{x0:-1,x1:4,sets:n=>n%2?[[0,2,false,false]]:[[1,3,false,false]],inf:[[1,2,false,false]],sup:[[0,3,false,false]],
+      ver:x=>(x>=1&&x<=2)?'inf':(x>=0&&x<=3?'sup':'fuera'),nota:'No tiene límite: el inferior es la intersección y el superior la unión.'},
+    borde:{x0:-.5,x1:2,sets:n=>[[0,1+(n%2?-1:1)/n,false,false]],inf:[[0,1,false,true]],sup:[[0,1,false,false]],
+      ver:x=>(x>=0&&x<1)?'inf':(Math.abs(x-1)<1e-9?'sup':'fuera'),nota:'Todo se decide en un solo punto: x = 1 está en los pares y falta en los impares.'},
+    escapa:{x0:0,x1:8,sets:n=>[[n/4,n/4+1,false,false]],inf:[],sup:[],
+      ver:()=>'fuera',nota:'Cada punto está en a lo sumo cinco conjuntos: los dos límites son vacíos.'},
+    barrido:{x0:-.25,x1:1.25,sets:barrido,inf:[],sup:[[0,1,false,false]],
+      ver:x=>(x>=0&&x<=1)?'sup':'fuera',nota:'Cada x de [0,1] cae en un pedazo de cada pasada y falta en los demás.'}
+  };
+  const dentro=(I,x)=>I.some(([a,b,oa,ob])=>(oa?x>a:x>=a)&&(ob?x<b:x<=b));
+  let ej=EJ.alterna;
+  const xval=()=>{const t=+$('#m1-x').value/1000;let x=ej.x0+t*(ej.x1-ej.x0);const r=Math.round(x*20)/20;return Math.abs(x-r)<(ej.x1-ej.x0)/400?r:x;};
+  function intervalo(ctx,X,y,I,color,h){
+    I.forEach(([a,b,oa,ob])=>{const xa=X(a),xb=X(b);
+      ctx.fillStyle=color;ctx.globalAlpha=.85;ctx.fillRect(xa,y-h/2,Math.max(2,xb-xa),h);ctx.globalAlpha=1;
+      [[xa,oa],[xb,ob]].forEach(([px,ab])=>{ctx.beginPath();ctx.arc(px,y,h/2+1.5,0,7);ctx.fillStyle=ab?tok('--card'):color;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=color;ctx.stroke();});
+    });
+  }
+  const dibujar=canvasWidget($('#m1-c'),w=>{const N=+$('#m1-n').value;return (N*18+110)/w;},(ctx,w,h)=>{
+    const N=+$('#m1-n').value,x=xval();
+    const L=48,R=12,X=v=>L+(v-ej.x0)/(ej.x1-ej.x0)*(w-L-R);
+    ctx.clearRect(0,0,w,h);
+    ctx.font='11px '+tok('--f-mono');ctx.textBaseline='middle';ctx.textAlign='right';
+    for(let n=1;n<=N;n++){const y=12+(n-1)*18;
+      ctx.fillStyle=tok('--muted');ctx.fillText('A'+n,L-8,y);
+      ctx.strokeStyle=tok('--grid');ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(w-R,y);ctx.stroke();
+      intervalo(ctx,X,y,ej.sets(n),tok('--accent'),7);
+      const esta=dentro(ej.sets(n),x);
+      ctx.beginPath();ctx.arc(X(x),y,4,0,7);ctx.fillStyle=esta?tok('--ink'):tok('--card');ctx.fill();ctx.strokeStyle=tok('--ink');ctx.lineWidth=1.5;ctx.stroke();
+    }
+    const y0=12+N*18+4;
+    ctx.strokeStyle=tok('--line');ctx.beginPath();ctx.moveTo(L,y0);ctx.lineTo(w-R,y0);ctx.stroke();
+    const yi=y0+20,ys=y0+44;
+    ctx.fillStyle=tok('--good');ctx.fillText('inf',L-8,yi);ctx.fillStyle=tok('--warm');ctx.fillText('sup',L-8,ys);
+    [[yi,ej.inf,'--good'],[ys,ej.sup,'--warm']].forEach(([y,I,c])=>{ctx.strokeStyle=tok('--grid');ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(w-R,y);ctx.stroke();
+      if(I.length)intervalo(ctx,X,y,I,tok(c),9);else{ctx.textAlign='left';ctx.fillStyle=tok('--muted');ctx.fillText('∅ (vacío)',L+6,y);ctx.textAlign='right';}});
+    // eje
+    const ye=ys+24;ctx.textAlign='center';ctx.fillStyle=tok('--muted');
+    const paso=(ej.x1-ej.x0)>4?1:(ej.x1-ej.x0)>2?.5:.25;
+    for(let v=Math.ceil(ej.x0/paso)*paso;v<=ej.x1+1e-9;v+=paso)ctx.fillText(short(v),X(v),ye);
+    ctx.strokeStyle=tok('--ink');ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(X(x),4);ctx.lineTo(X(x),ys+10);ctx.stroke();ctx.setLineDash([]);
+  });
+  function leer(){
+    ej=EJ[$('#m1-ej').value];
+    const N=+$('#m1-n').value,x=xval();
+    $('#m1-n-o').textContent=N;$('#m1-x-o').textContent=short(x).replace('.',',');
+    let hist='';for(let n=1;n<=40;n++){hist+=dentro(ej.sets(n),x)?'<b>1</b>':'<i>0</i>';}
+    const v=ej.ver(x);
+    const veredicto={inf:'<span class="ok">x termina dentro para siempre: está en el límite inferior (y también en el superior).</span>',
+      sup:'<span class="warn">x entra y sale sin fin: está en el límite superior, pero no en el inferior.</span>',
+      fuera:'<span>A partir de cierto n, x no vuelve a entrar: no está en ningún límite.</span>'}[v];
+    $('#m1-out').innerHTML='<span>Historia de x = '+short(x).replace('.',',')+' en A<sub>1</sub>…A<sub>40</sub>:</span><span class="m1-hist">'+hist+'</span>'+veredicto+'<span>'+ej.nota+'</span>';
+    dibujar();
+  }
+  ['#m1-n','#m1-x'].forEach(s=>$(s).addEventListener('input',leer));
+  $('#m1-ej').addEventListener('change',leer);
+  leer();
+})();
+</script>
+<script>
+(function(){
+  const {$,tok,canvasWidget,frame,fmt,dot}=window.Lab;
+  const EJ={
+    alt:{f:k=>(k%2?-1:1)*(1+1/k),y0:-2.2,y1:2.2,sup:'1',inf:'−1'},
+    sin:{f:k=>Math.sin(k),y0:-1.4,y1:1.4,sup:'1',inf:'−1'},
+    mod:{f:k=>k%3,y0:-.6,y1:2.6,sup:'2',inf:'0'},
+    conv:{f:k=>2+(k%2?-1:1)/k,y0:.8,y1:3.2,sup:'2',inf:'2'},
+    sube:{f:k=>(k%2?-1:1)*k/4,y0:-16,y1:16,sup:'+∞',inf:'−∞'}
+  };
+  const K=60,COLA=2000;
+  let ej=EJ.alt;
+  const techo=n=>{let s=-Infinity;for(let k=n;k<=COLA;k++)s=Math.max(s,ej.f(k));return s;};
+  const piso=n=>{let s=Infinity;for(let k=n;k<=COLA;k++)s=Math.min(s,ej.f(k));return s;};
+  const dibujar=canvasWidget($('#m2-c'),Lab.wide,(ctx,w,h)=>{
+    const m=+$('#m2-m').value;
+    const F=frame(ctx,w,h,{x0:0,x1:K+1,y0:ej.y0,y1:ej.y1,sx:10});
+    ctx.fillStyle=tok('--accent-soft');ctx.fillRect(F.X(m-.5),F.p.t,F.X(K+1)-F.X(m-.5),F.ph);
+    F.clip();
+    [[techo,'--warm'],[piso,'--good']].forEach(([g,c])=>{ctx.strokeStyle=tok(c);ctx.lineWidth=2.2;ctx.beginPath();
+      for(let n=1;n<=K;n++){let v=g(n);v=Math.max(ej.y0-1,Math.min(ej.y1+1,v));const x=F.X(n-.5),y=F.Y(v);n===1?ctx.moveTo(x,y):ctx.lineTo(x,y);ctx.lineTo(F.X(n+.5),y);}ctx.stroke();});
+    ctx.restore();
+    for(let k=1;k<=K;k++){const v=ej.f(k);if(v<ej.y0||v>ej.y1)continue;dot(ctx,F.X(k),F.Y(v),k>=m?tok('--accent'):tok('--muted'),k>=m?3.6:2.4);}
+    ctx.strokeStyle=tok('--ink');ctx.setLineDash([4,3]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(F.X(m-.5),F.p.t);ctx.lineTo(F.X(m-.5),F.p.t+F.ph);ctx.stroke();ctx.setLineDash([]);
+  });
+  function leer(){
+    ej=EJ[$('#m2-ej').value];
+    const m=+$('#m2-m').value;$('#m2-m-o').textContent=m;
+    const a=techo(m),b=piso(m);
+    const f=v=>isFinite(v)?fmt(v,3).replace('.',','):(v>0?'+∞':'−∞');
+    const inf=ej===EJ.sube;
+    $('#m2-out').innerHTML='<span>Cola x<sub>'+m+'</sub>, x<sub>'+(m+1)+'</sub>, …</span>'+
+      '<span class="big">techo a<sub>'+m+'</sub> = '+(inf?'+∞':f(a))+' · piso b<sub>'+m+'</sub> = '+(inf?'−∞':f(b))+'</span>'+
+      '<span>Al correr la cola, el techo baja hacia lím sup = <b>'+ej.sup+'</b> y el piso sube hacia lím inf = <b>'+ej.inf+'</b>.</span>'+
+      (ej.sup===ej.inf?'<span class="ok">Techo y piso se juntan: la sucesión converge a '+ej.sup+'.</span>':'<span class="warn">Techo y piso no se juntan: la sucesión no tiene límite.</span>');
+    dibujar();
+  }
+  $('#m2-m').addEventListener('input',leer);$('#m2-ej').addEventListener('change',leer);
+  leer();
+})();
+</script>
+<script>
+(function(){
+  const {$,tok,canvasWidget}=window.Lab;
+  const OPS={and:{f:(a,b)=>a*b,t:'𝟏<sub>A∩B</sub> = 𝟏<sub>A</sub> · 𝟏<sub>B</sub> = mín(𝟏<sub>A</sub>, 𝟏<sub>B</sub>)'},
+    or:{f:(a,b)=>a+b-a*b,t:'𝟏<sub>A∪B</sub> = 𝟏<sub>A</sub> + 𝟏<sub>B</sub> − 𝟏<sub>A</sub>𝟏<sub>B</sub> = máx(𝟏<sub>A</sub>, 𝟏<sub>B</sub>)'},
+    not:{f:a=>1-a,t:'𝟏<sub>Aᶜ</sub> = 1 − 𝟏<sub>A</sub>'},
+    minus:{f:(a,b)=>a*(1-b),t:'𝟏<sub>A∖B</sub> = 𝟏<sub>A</sub>(1 − 𝟏<sub>B</sub>)'},
+    xor:{f:(a,b)=>(a+b)%2,t:'𝟏<sub>A△B</sub> = |𝟏<sub>A</sub> − 𝟏<sub>B</sub>| = (𝟏<sub>A</sub> + 𝟏<sub>B</sub>) mód 2'}};
+  const v=id=>+$(id).value/10;
+  const rango=()=>{let a1=v('#m3-a1'),a2=v('#m3-a2'),b1=v('#m3-b1'),b2=v('#m3-b2');return [Math.min(a1,a2),Math.max(a1,a2),Math.min(b1,b2),Math.max(b1,b2)];};
+  const dibujar=canvasWidget($('#m3-c'),w=>w<520?1.05:.62,(ctx,w,h)=>{
+    const [a1,a2,b1,b2]=rango(),op=OPS[$('#m3-op').value];
+    const L=40,R=12,X=x=>L+x/10*(w-L-R);
+    ctx.clearRect(0,0,w,h);ctx.font='12px '+tok('--f-mono');ctx.textBaseline='middle';ctx.textAlign='right';
+    const IA=x=>x>=a1&&x<=a2?1:0,IB=x=>x>=b1&&x<=b2?1:0,IR=x=>op.f(IA(x),IB(x));
+    const filas=[['A',IA,'--accent'],['B',IB,'--c-tra'],['res',IR,'--warm']];
+    const alto=(h-30)/3;
+    filas.forEach(([nom,f,c],i)=>{
+      const y0=8+i*alto,yb=y0+alto*.78,yt=y0+alto*.22;
+      ctx.fillStyle=tok('--muted');ctx.fillText(nom==='res'?'res':'𝟏'+nom,L-8,(yb+yt)/2);
+      ctx.strokeStyle=tok('--grid');ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L,yb);ctx.lineTo(w-R,yb);ctx.moveTo(L,yt);ctx.lineTo(w-R,yt);ctx.stroke();
+      ctx.fillStyle=tok(c);ctx.globalAlpha=.18;
+      for(let px=L;px<w-R;px++){const x=(px-L)/(w-L-R)*10;if(f(x))ctx.fillRect(px,yt,1,yb-yt);}
+      ctx.globalAlpha=1;ctx.strokeStyle=tok(c);ctx.lineWidth=2.5;ctx.beginPath();
+      for(let px=L;px<=w-R;px++){const x=(px-L)/(w-L-R)*10;const y=f(x)?yt:yb;px===L?ctx.moveTo(px,y):ctx.lineTo(px,y);}ctx.stroke();
+      ctx.textAlign='left';ctx.fillStyle=tok('--muted');ctx.fillText('1',w-R-10,yt-8);ctx.fillText('0',w-R-10,yb+9);ctx.textAlign='right';
+    });
+    ctx.textAlign='center';ctx.fillStyle=tok('--muted');for(let x=0;x<=10;x+=2)ctx.fillText(x,X(x),h-10);
+  });
+  function leer(){
+    ['#m3-a1','#m3-a2','#m3-b1','#m3-b2'].forEach(s=>$(s+'-o').textContent=String(v(s)).replace('.',','));
+    const [a1,a2,b1,b2]=rango(),op=OPS[$('#m3-op').value];
+    let largo=0;for(let i=0;i<1000;i++){const x=(i+.5)/100;largo+=op.f(x>=a1&&x<=a2?1:0,x>=b1&&x<=b2?1:0)/100;}
+    $('#m3-out').innerHTML='<span class="big">'+op.t+'</span><span>A = ['+a1+', '+a2+'] · B = ['+b1+', '+b2+'] dentro de Ω = [0, 10]</span>'+
+      '<span>Largo total del resultado: '+largo.toFixed(1).replace('.',',')+'. Medir un conjunto será integrar su indicadora: el área bajo la curva roja.</span>';
+    dibujar();
+  }
+  document.querySelectorAll('[id="01-lab-3"] input,[id="01-lab-3"] select').forEach(el=>el.addEventListener('input',leer));
+  leer();
+})();
+</script>
+</body>
+</html>
