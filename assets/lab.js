@@ -70,7 +70,7 @@ function ring(ctx,x,y,color,fill){ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx
 /* ---------- Navegación entre páginas y avance ---------- */
 // Datos del curso: los escribe el motor al generar el sitio
 const CURSO={"prefijo": "medida-"};
-const PAGES=[["index", "index.html", "", "Inicio", 0, 0], ["limites-de-conjuntos", "01-limites-de-conjuntos.html", "01", "Límites de conjuntos", 0, 1], ["sigma-algebras", "02-sigma-algebras.html", "02", "σ-álgebras", 0, 1], ["medidas", "03-medidas.html", "03", "Medidas", 0, 1], ["medida-de-lebesgue", "04-medida-de-lebesgue.html", "04", "La medida de Lebesgue", 0, 1], ["funciones-medibles", "05-funciones-medibles.html", "05", "Funciones medibles", 1, 2], ["integral-de-lebesgue", "06-integral-de-lebesgue.html", "06", "La integral de Lebesgue", 1, 2], ["teoremas-de-convergencia", "07-teoremas-de-convergencia.html", "07", "Teoremas de convergencia", 1, 2], ["espacios-lp", "08-espacios-lp.html", "08", "Convergencia y espacios Lp", 1, 2], ["derivar-e-integrar", "09-derivar-e-integrar.html", "09", "Derivar e integrar", 1, 3], ["medida-producto", "10-medida-producto.html", "10", "Medida producto y Fubini", 1, 3], ["notacion", "notacion.html", "A", "Notación", 0, "apendices"], ["enunciados", "enunciados.html", "B", "Índice de enunciados", 0, "apendices"]];
+const PAGES=[["index", "index.html", "", "Inicio", 0, 0], ["limites-de-conjuntos", "01-limites-de-conjuntos.html", "01", "Límites de conjuntos", 0, 1], ["sigma-algebras", "02-sigma-algebras.html", "02", "σ-álgebras", 0, 1], ["medidas", "03-medidas.html", "03", "Medidas", 0, 1], ["medida-de-lebesgue", "04-medida-de-lebesgue.html", "04", "La medida de Lebesgue", 0, 1], ["funciones-medibles", "05-funciones-medibles.html", "05", "Funciones medibles", 0, 2], ["integral-de-lebesgue", "06-integral-de-lebesgue.html", "06", "La integral de Lebesgue", 0, 2], ["teoremas-de-convergencia", "07-teoremas-de-convergencia.html", "07", "Teoremas de convergencia", 0, 2], ["espacios-lp", "08-espacios-lp.html", "08", "Convergencia y espacios Lp", 0, 2], ["derivar-e-integrar", "09-derivar-e-integrar.html", "09", "Derivar e integrar", 0, 3], ["medida-producto", "10-medida-producto.html", "10", "Medida producto y Fubini", 0, 3], ["notacion", "notacion.html", "A", "Notación", 0, "apendices"], ["enunciados", "enunciados.html", "B", "Índice de enunciados", 0, "apendices"]];
 const ETAPAS=[[1, "Parte 1 · Medir conjuntos"], [2, "Parte 2 · Integrar"], [3, "Parte 3 · Derivar y multiplicar"], ["apendices", "Apéndices"]];
 const PREF=CURSO.prefijo;
 const store={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
@@ -144,8 +144,16 @@ function renderMath(raiz){
   (raiz||document).querySelectorAll('.math,.math-display').forEach(el=>{
     if(el.dataset.tex!==undefined)return;
     const tex=el.textContent;el.dataset.tex=tex;
-    try{katex.render(tex,el,{displayMode:el.classList.contains('math-display'),throwOnError:false,output:'htmlAndMathml'});}
-    catch(err){el.textContent=tex;}
+    const display=el.classList.contains('math-display');
+    // El número de una ecuación (	ag{3.1}) va en su propia columna: en el celular no tapa la fórmula
+    const m=display&&tex.match(/\\tag\{([^{}]*)\}\s*$/);
+    let destino=el;
+    if(m){el.textContent='';el.classList.add('con-numero');
+      destino=document.createElement('span');destino.className='formula';
+      const n=document.createElement('span');n.className='eq-num';n.textContent='('+m[1]+')';
+      el.append(destino,n);}
+    try{katex.render(m?tex.slice(0,m.index):tex,destino,{displayMode:display,throwOnError:false,output:'htmlAndMathml'});}
+    catch(err){destino.textContent=tex;}
   });
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>renderMath());else renderMath();
